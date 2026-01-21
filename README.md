@@ -1,3 +1,2 @@
 # Dotnet-Practice
 
-# architecture
