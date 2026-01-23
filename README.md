@@ -5,8 +5,6 @@ This project is meant for learning **object-oriented programming (OOP)** concept
 
 ---
 
-## 🚀 Features
-
 - Two-player turn-based combat
 - Player actions:
   - ⚔️ Attack
