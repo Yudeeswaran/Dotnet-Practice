@@ -54,37 +54,6 @@ The enemy uses a **simple rule-based AI** to decide its actions based on health 
 
 ---
 
-## 📁 Project Structure
-
-```text
-GameCharacterAbilitySystem/
-├── Program.cs
-├── Core/
-│   ├── GameEngine.cs
-│   └── GameState.cs
-├── Characters/
-│   ├── GameCharacter.cs
-│   ├── PlayerCharacter.cs
-│   └── EnemyCharacter.cs
-├── CharacterTypes/
-│   ├── Warrior.cs
-│   ├── Mage.cs
-│   └── Archer.cs
-├── Interfaces/
-│   ├── ISpecialAbility.cs
-│   └── IEnemyBehavior.cs
-├── EnemyAI/
-│   └── BasicEnemyAI.cs
-├── Combat/
-│   ├── AttackManager.cs
-│   └── DamageCalculator.cs
-├── Utilities/
-│   ├── InputHandler.cs
-│   └── DisplayManager.cs
-└── Enums/
-    ├── ActionType.cs
-    └── DifficultyLevel.cs
-```
 
 
 
