@@ -37,11 +37,14 @@ namespace GameSystem.Characters
             target.TakeDamage(attackPower);
         }
 
-        protected void TakeDamage(int damage)
+        public void TakeDamage(int amount)
         {
-            health -= damage;
+            health -= amount;
             if (health < 0)
                 health = 0;
+
+
+            Console.WriteLine($"{name} took {amount} damage.");
         }
 
         public virtual void DisplayStats()
