@@ -1,18 +1,17 @@
 using System;
+using GameSystem.Core;
 
 namespace GameSystem.Characters
 {
-
-    // Abstract CLass - This hides the implementation, Cause its just a template and we dont need any implementation for it.
-    public abstract class GameCharacter
+    // Abstract class acts as a template for all characters
+    public abstract class GameCharacter : ICombatant
     {
-
-        // encapsulation 
+        // Encapsulation
         protected string name;
         protected int health;
         protected int attackPower;
 
-        // Base constructor
+        // Base constructor (forces valid initialization)
         protected GameCharacter(string name, int health, int attackPower)
         {
             this.name = name;
@@ -20,25 +19,18 @@ namespace GameSystem.Characters
             this.attackPower = attackPower;
         }
 
-        // getter - properties
+        // Read-only properties
         public string Name
         {
-            get
-            {
-                return name;
-            }
+            get { return name; }
         }
-
 
         public int Health
         {
-            get
-            {
-                return health;
-            }
+            get { return health; }
         }
 
-        // Overriding
+        // Virtual method (polymorphism)
         public virtual void Attack(GameCharacter target)
         {
             Console.WriteLine($"{name} attacks {target.name} for {attackPower} damage");
@@ -48,7 +40,8 @@ namespace GameSystem.Characters
         protected void TakeDamage(int damage)
         {
             health -= damage;
-            if (health < 0) health = 0;
+            if (health < 0)
+                health = 0;
         }
 
         public virtual void DisplayStats()

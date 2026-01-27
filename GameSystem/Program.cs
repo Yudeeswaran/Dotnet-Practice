@@ -6,11 +6,10 @@ namespace GameSystem
     {
         static void Main(string[] args)
         {
-
-            // the main object is created
+            // Create game engine
             GameEngine engine = new GameEngine();
 
-            // the function to start the game is called
+            // Start the game
             engine.StartGame();
         }
     }
