@@ -37,36 +37,20 @@ namespace GameSystem.Characters
             target.TakeDamage(attackPower);
         }
 
-        public virtual void TakeDamage(int damage , bool isCritical)
+        public virtual void TakeDamage(int damage)
         {
             Random random = new Random();
             bool isBlocked = random.Next(1, 101) <= 90; // 90% block chance
 
 
-            //if (isBlocked)
-            //{
-            //    Console.WriteLine($"{name} blocked the attack!");
-            //    return;
-            //}
-
-            if (isCritical) {
-                if (isBlocked)
-                {
-                    health -= 10;
-                    if (health < 0) health = 0;
-                }
-
-            }
-            else if(!isCritical && !isBlocked)
-            {
-                health -= damage;
-                if (health < 0) health = 0;
-            }
-            else
+            if (isBlocked)
             {
                 Console.WriteLine($"{name} blocked the attack!");
                 return;
             }
+            health -= damage;
+                if (health < 0) health = 0;
+           
         }
 
         public virtual void DisplayStats()

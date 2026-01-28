@@ -37,7 +37,7 @@ namespace GameSystem.Characters
             : $"{name} attacks normally.");
 
 
-            target.TakeDamage(damage,isCritical);
+            target.TakeDamage(damage);
         }
 
         // Player-specific ability
