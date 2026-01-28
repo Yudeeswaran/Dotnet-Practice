@@ -37,7 +37,7 @@ namespace GameSystem.Characters
             : $"{name} attacks normally.");
 
 
-            target.TakeDamage(damage);
+            target.TakeDamage(damage,isCritical);
         }
 
         // Player-specific ability
@@ -45,8 +45,10 @@ namespace GameSystem.Characters
         {
             if (healCount > 0)
             {
-                health += 20;
-                healCount--;
+                if (health + 20 < 100) health = health + 20;
+                else health = 100;
+
+                    healCount--;
                 Console.WriteLine($"{name} healed. Remaining heals: {healCount}");
             }
             else
