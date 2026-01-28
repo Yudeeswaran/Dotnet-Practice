@@ -37,14 +37,20 @@ namespace GameSystem.Characters
             target.TakeDamage(attackPower);
         }
 
-        public void TakeDamage(int amount)
+        public virtual void TakeDamage(int damage)
         {
-            health -= amount;
-            if (health < 0)
-                health = 0;
+            Random random = new Random();
+            bool isBlocked = random.Next(1, 101) <= 90; // 90% block chance
 
 
-            Console.WriteLine($"{name} took {amount} damage.");
+            if (isBlocked)
+            {
+                Console.WriteLine($"{name} blocked the attack!");
+                return;
+            }
+            health -= damage;
+                if (health < 0) health = 0;
+           
         }
 
         public virtual void DisplayStats()
