@@ -1,7 +1,8 @@
 using System;
-using GameSystem.Core;
+using GameSystem.Services;
+using GameSystem.interfaces;
 
-namespace GameSystem.Characters
+namespace GameSystem.Models.Characters
 {
     // Abstract class acts as a template for all characters
     public abstract class GameCharacter : ICombatant
@@ -40,7 +41,7 @@ namespace GameSystem.Characters
         public virtual void TakeDamage(int damage)
         {
             Random random = new Random();
-            bool isBlocked = random.Next(1, 101) <= 90; // 90% block chance
+            bool isBlocked = random.Next(1, 101) <= 50; // 90% block chance
 
 
             if (isBlocked)

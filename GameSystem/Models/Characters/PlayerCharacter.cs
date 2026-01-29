@@ -1,6 +1,6 @@
 using System;
 
-namespace GameSystem.Characters
+namespace GameSystem.Models.Characters
 {
     public class PlayerCharacter : GameCharacter
     {

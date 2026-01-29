@@ -1,4 +1,4 @@
-﻿using GameSystem.Core;
+﻿using GameSystem.Services;
 
 namespace GameSystem
 {
