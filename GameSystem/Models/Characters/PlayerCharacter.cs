@@ -1,6 +1,6 @@
 using System;
 
-namespace GameSystem.Characters
+namespace GameSystem.Models.Characters
 {
     public class PlayerCharacter : GameCharacter
     {
@@ -45,8 +45,10 @@ namespace GameSystem.Characters
         {
             if (healCount > 0)
             {
-                health += 20;
-                healCount--;
+                if (health + 20 < 100) health = health + 20;
+                else health = 100;
+
+                    healCount--;
                 Console.WriteLine($"{name} healed. Remaining heals: {healCount}");
             }
             else

@@ -1,9 +1,11 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Characters",
-    "\\Core"
+    "\\interfaces",
+    "\\Models",
+    "\\Models\\Characters",
+    "\\Services"
   ],
-  "SelectedNode": "\\Characters\\PlayerCharacter.cs",
+  "SelectedNode": "\\Services\\Gameengine.cs",
   "PreviewInSolutionExplorer": false
 }

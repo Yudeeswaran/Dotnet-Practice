@@ -1,8 +1,8 @@
 using System;
-using GameSystem.Characters;
-using GameSystem.Core;
+using GameSystem.Models.Characters;
+using GameSystem.interfaces;
 
-namespace GameSystem.Core
+namespace GameSystem.Services
 {
     // GameEngine controls the game flow
     public class GameEngine
