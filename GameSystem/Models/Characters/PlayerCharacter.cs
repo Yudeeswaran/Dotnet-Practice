@@ -4,64 +4,41 @@ namespace GameSystem.Models.Characters
 {
     public class PlayerCharacter : GameCharacter
     {
-        private int healCount;
+        private int healCount = 3;
 
-        // Constructor chaining
         public PlayerCharacter(string name)
-            : base(name, 100, 15)
-        {
-            healCount = 3;
-        }
-
-        public PlayerCharacter(string name, int health, int attackPower)
-            : base(name, health, attackPower)
-        {
-            healCount = 3;
-        }
-
-        //Special ability that will be triggered randomly at a chance rate of 20 percent.
-
-        private Random random = new Random();
-
+            : base(name, 100, 15) { }
 
         public override void Attack(GameCharacter target)
         {
-            bool isCritical = random.Next(1, 101) <= 20; // 20% chance
-
-
+            bool isCritical = random.Next(1, 101) <= 20;
             int damage = isCritical ? attackPower * 2 : attackPower;
 
-
             Console.WriteLine(isCritical
-            ? $"{name} lands a CRITICAL HIT!"
-            : $"{name} attacks normally.");
-
+                ? $"{name} lands a CRITICAL HIT!"
+                : $"{name} attacks normally.");
 
             target.TakeDamage(damage);
         }
 
-        // Player-specific ability
         public void Heal()
         {
-            if (healCount > 0)
-            {
-                if (health + 20 < 100) health = health + 20;
-                else health = 100;
-
-                    healCount--;
-                Console.WriteLine($"{name} healed. Remaining heals: {healCount}");
-            }
-            else
+            if (healCount <= 0)
             {
                 Console.WriteLine($"{name} has no heals left!");
+                return;
             }
+
+            health = Math.Min(maxHealth, health + 20);
+            healCount--;
+
+            Console.WriteLine($"{name} healed. Remaining heals: {healCount}");
         }
 
-        // Polymorphic behavior
         public override void DisplayStats()
         {
             base.DisplayStats();
-            Console.WriteLine($"Heals  : {healCount}");
+            Console.WriteLine($"Heals left: {healCount}");
         }
     }
 }

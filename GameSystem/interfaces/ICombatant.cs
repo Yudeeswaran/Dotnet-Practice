@@ -1,9 +1,11 @@
+using GameSystem.Models.Characters;
+
 namespace GameSystem.interfaces
 {
-    // Represents any character that can participate in combat
     public interface ICombatant
     {
-        void Attack(GameSystem.Models.Characters.GameCharacter target);
+        string Name { get; }
         int Health { get; }
+        void Attack(GameCharacter target);
     }
 }

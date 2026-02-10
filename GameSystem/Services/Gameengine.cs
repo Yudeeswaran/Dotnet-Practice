@@ -1,98 +1,91 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using GameSystem.Models.Characters;
-using GameSystem.interfaces;
 
 namespace GameSystem.Services
 {
-    // GameEngine controls the game flow
     public class GameEngine
     {
+        private readonly PlayerDataService dataService = new PlayerDataService();
+
         public void StartGame()
         {
-            Console.WriteLine("================================");
-            Console.WriteLine(" TURN BASED TWO PLAYER GAME ");
-            Console.WriteLine("================================\n");
+            DateTime startTime = DateTime.Now;
 
-            Console.Write("Enter Player 1 name: (default_name player1)");
-            string? p1Input = Console.ReadLine();
-            string p1 = string.IsNullOrWhiteSpace(p1Input) ? "Player 1" : p1Input;
+            Console.Write("Enter Player 1 name: ");
+            string p1 = Console.ReadLine() ?? "Player 1";
+
+            Console.Write("Enter Player 2 name: ");
+            string p2 = Console.ReadLine() ?? "Player 2";
+
             PlayerCharacter player1 = new PlayerCharacter(p1);
-
-            Console.Write("Enter Player 2 name: (default_name player2)");
-            string? p2Input = Console.ReadLine();
-            string p2 = string.IsNullOrWhiteSpace(p2Input) ? "Player 2" : p2Input;
             PlayerCharacter player2 = new PlayerCharacter(p2);
 
-            Console.WriteLine("\n--- INITIAL STATS ---");
-            player1.DisplayStats();
-            Console.WriteLine("--------------------");
-            player2.DisplayStats();
+            List<PlayerCharacter> players = new() { player1, player2 };
+
+            PlayerCharacter currentPlayer = player1;
+            PlayerCharacter opponent = player2;
 
             bool isRunning = true;
 
-            ICombatant currentPlayer;
-            ICombatant opponent;
-
             while (isRunning)
             {
-                currentPlayer = player1;
-                opponent = player2;
+                Console.WriteLine($"\n{currentPlayer.Name}'s Turn");
+                Console.WriteLine("1. Attack\n2. Heal\n3. Show Stats\n4. Give Up");
+                Console.Write("Choice: ");
 
-                for (int i = 0; i < 2 && isRunning; i++)
+                if (!int.TryParse(Console.ReadLine(), out int input) ||
+                    !Enum.IsDefined(typeof(PlayerAction), input))
                 {
-                    Console.WriteLine($"\n{((GameCharacter)currentPlayer).Name}'s Turn");
-                    Console.WriteLine("1. Attack");
-                    Console.WriteLine("2. Heal");
-                    Console.WriteLine("3. Show Stats");
-                    Console.WriteLine("4. Give Up");
+                    Console.WriteLine("Invalid choice.");
+                    continue;
+                }
 
-                    Console.Write("Choose option: ");
-                    string choice = Console.ReadLine();
+                PlayerAction action = (PlayerAction)input;
 
-                    switch (choice)
+                try
+                {
+                    switch (action)
                     {
-                        case "1":
-                            currentPlayer.Attack((GameCharacter)opponent);
-                            if (opponent.Health <= 0)
-                            {
-                                Console.WriteLine($"{((GameCharacter)currentPlayer).Name} wins!");
-                                isRunning = false;
-                            }
+                        case PlayerAction.Attack:
+                            currentPlayer.Attack(opponent);
                             break;
 
-                        case "2":
-                            ((PlayerCharacter)currentPlayer).Heal();
+                        case PlayerAction.Heal:
+                            currentPlayer.Heal();
                             break;
 
-                        case "3":
-                            ((GameCharacter)currentPlayer).DisplayStats();
-                            ((GameCharacter)opponent).DisplayStats();
-                            break;
+                        case PlayerAction.ShowStats:
+                            players.ForEach(p => p.DisplayStats());
+                            continue;
 
-                        case "4":
-                            Console.WriteLine($"{((GameCharacter)currentPlayer).Name} gave up!");
-                            Console.WriteLine($"{((GameCharacter)opponent).Name} wins!");
+                        case PlayerAction.GiveUp:
+                            Console.WriteLine($"{currentPlayer.Name} gave up!");
                             isRunning = false;
                             break;
-
-                        default:
-                            Console.WriteLine("Invalid choice");
-                            break;
-                    }
-
-                    // Swap turns - Only swap if the choice is attack or heal else no swap
-                    if (choice == "1" || choice == "2")
-                    {
-                        
-                        var temp = currentPlayer;
-                        currentPlayer = opponent;
-                        opponent = temp;
                     }
                 }
+                catch (Exception)
+                {
+                    Console.WriteLine("Unexpected error during turn.");
+                }
+
+                if (players.Any(p => p.Health <= 0))
+                {
+                    var winner = players.First(p => p.Health > 0);
+                    Console.WriteLine($"\n{winner.Name} WINS!");
+                    isRunning = false;
+                }
+
+                (currentPlayer, opponent) = (opponent, currentPlayer);
             }
 
-            
-            Console.WriteLine("\nGame Over.");
+            TimeSpan duration = DateTime.Now - startTime;
+            Console.WriteLine($"\nGame duration: {duration.TotalMinutes:F1} minutes");
+
+            players.ForEach(p => dataService.SavePlayer(p));
+            dataService.ShowLeaderboard();
         }
     }
 }

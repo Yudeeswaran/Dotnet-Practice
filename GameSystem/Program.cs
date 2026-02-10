@@ -6,10 +6,7 @@ namespace GameSystem
     {
         static void Main(string[] args)
         {
-            // Create game engine
             GameEngine engine = new GameEngine();
-
-            // Start the game
             engine.StartGame();
         }
     }
