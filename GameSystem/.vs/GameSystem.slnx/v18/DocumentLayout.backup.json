@@ -11,12 +11,16 @@
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\yvijay106\\Downloads\\Dotnet-Practice\\GameSystem\\Services\\Gameengine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Services\\Gameengine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\yvijay106\\Downloads\\Dotnet-Practice\\GameSystem\\Services\\DatabaseInitializer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Services\\DatabaseInitializer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\yvijay106\\Downloads\\Dotnet-Practice\\GameSystem\\Services\\PlayerAction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Services\\PlayerAction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\yvijay106\\Downloads\\Dotnet-Practice\\GameSystem\\Services\\Gameengine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Services\\Gameengine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\yvijay106\\Downloads\\Dotnet-Practice\\GameSystem\\Models\\Characters\\PlayerCharacter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -38,11 +42,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "DatabaseInitializer.cs",
+              "DocumentMoniker": "C:\\Users\\yvijay106\\Downloads\\Dotnet-Practice\\GameSystem\\Services\\DatabaseInitializer.cs",
+              "RelativeDocumentMoniker": "Services\\DatabaseInitializer.cs",
+              "ToolTip": "C:\\Users\\yvijay106\\Downloads\\Dotnet-Practice\\GameSystem\\Services\\DatabaseInitializer.cs",
+              "RelativeToolTip": "Services\\DatabaseInitializer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-11T06:52:19.568Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -52,7 +69,7 @@
               "RelativeDocumentMoniker": "Services\\PlayerDataServices.cs",
               "ToolTip": "C:\\Users\\yvijay106\\Downloads\\Dotnet-Practice\\GameSystem\\Services\\PlayerDataServices.cs",
               "RelativeToolTip": "Services\\PlayerDataServices.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAqwCoAAABBAAAAAAAAAA==",
+              "ViewState": "AgIAAEIAAAAAAAAAAAAAAFgAAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-02-10T06:18:44.106Z",
               "EditorCaption": ""
@@ -72,52 +89,52 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "Gameengine.cs",
               "DocumentMoniker": "C:\\Users\\yvijay106\\Downloads\\Dotnet-Practice\\GameSystem\\Services\\Gameengine.cs",
               "RelativeDocumentMoniker": "Services\\Gameengine.cs",
               "ToolTip": "C:\\Users\\yvijay106\\Downloads\\Dotnet-Practice\\GameSystem\\Services\\Gameengine.cs",
               "RelativeToolTip": "Services\\Gameengine.cs",
-              "ViewState": "AgIAACsAAAAAAAAAAAAiwFsAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-01-29T10:54:48.118Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "PlayerCharacter.cs",
               "DocumentMoniker": "C:\\Users\\yvijay106\\Downloads\\Dotnet-Practice\\GameSystem\\Models\\Characters\\PlayerCharacter.cs",
               "RelativeDocumentMoniker": "Models\\Characters\\PlayerCharacter.cs",
               "ToolTip": "C:\\Users\\yvijay106\\Downloads\\Dotnet-Practice\\GameSystem\\Models\\Characters\\PlayerCharacter.cs",
               "RelativeToolTip": "Models\\Characters\\PlayerCharacter.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACwAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAUwBkAAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-01-29T10:54:28.797Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "GameCharacter.cs",
               "DocumentMoniker": "C:\\Users\\yvijay106\\Downloads\\Dotnet-Practice\\GameSystem\\Models\\Characters\\GameCharacter.cs",
               "RelativeDocumentMoniker": "Models\\Characters\\GameCharacter.cs",
               "ToolTip": "C:\\Users\\yvijay106\\Downloads\\Dotnet-Practice\\GameSystem\\Models\\Characters\\GameCharacter.cs",
               "RelativeToolTip": "Models\\Characters\\GameCharacter.cs",
-              "ViewState": "AgIAAAcAAAAAAAAAAAAiwBYAAAAjAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-01-29T10:54:15.578Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "ICombatant.cs",
               "DocumentMoniker": "C:\\Users\\yvijay106\\Downloads\\Dotnet-Practice\\GameSystem\\interfaces\\ICombatant.cs",
               "RelativeDocumentMoniker": "interfaces\\ICombatant.cs",
               "ToolTip": "C:\\Users\\yvijay106\\Downloads\\Dotnet-Practice\\GameSystem\\interfaces\\ICombatant.cs",
               "RelativeToolTip": "interfaces\\ICombatant.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-01-29T10:54:10.394Z",
               "EditorCaption": ""
@@ -130,7 +147,7 @@
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "C:\\Users\\yvijay106\\Downloads\\Dotnet-Practice\\GameSystem\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-01-23T10:19:54.679Z",
               "EditorCaption": ""

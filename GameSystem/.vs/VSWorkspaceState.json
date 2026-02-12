@@ -1,6 +1,7 @@
 {
   "ExpandedNodes": [
     "",
+    "\\Database",
     "\\interfaces",
     "\\Models",
     "\\Models\\Characters",

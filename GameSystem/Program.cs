@@ -6,8 +6,14 @@ namespace GameSystem
     {
         static void Main(string[] args)
         {
-            GameEngine engine = new GameEngine();
+            string connectionString =
+                "Server=(localdb)\\MSSQLLocalDB;Database=TestDB;Integrated Security=true;TrustServerCertificate=true;";
+
+            DatabaseInitializer.Initialize(connectionString);
+
+            GameEngine engine = new GameEngine(connectionString);
             engine.StartGame();
         }
+
     }
 }

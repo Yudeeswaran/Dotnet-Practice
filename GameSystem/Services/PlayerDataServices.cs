@@ -1,4 +1,6 @@
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
 using Microsoft.Data.SqlClient;
 using GameSystem.Models.Characters;
 
@@ -6,47 +8,95 @@ namespace GameSystem.Services
 {
     public class PlayerDataService
     {
-        private const string ConnectionString =
-            "Server=(localdb)\\MSSQLLocalDB;Database=TestDB;Trusted_Connection=True;";
+        private readonly string _connectionString;
 
-        public void SavePlayer(PlayerCharacter player)
+        // Constructor Injection
+        public PlayerDataService(string connectionString)
         {
+            _connectionString = connectionString;
+        }
+
+        public void SaveMatch(
+            DateTime start,
+            DateTime end,
+            PlayerCharacter winner,
+            List<PlayerCharacter> players)
+        {
+            using SqlConnection conn = new SqlConnection(_connectionString);
+            conn.Open();
+
+            using SqlTransaction transaction = conn.BeginTransaction();
+
             try
             {
-                using SqlConnection conn = new SqlConnection(ConnectionString);
-                using SqlCommand cmd = new SqlCommand(
-                    "INSERT INTO Players (Name, Health) VALUES (@name, @health)",
-                    conn);
+                int matchId;
 
-                cmd.Parameters.AddWithValue("@name", player.Name);
-                cmd.Parameters.AddWithValue("@health", player.Health);
+                // 1️⃣ Insert Match using SP
+                using (SqlCommand cmd = new SqlCommand("dbo.InsertMatch", conn, transaction))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
 
-                conn.Open();
-                cmd.ExecuteNonQuery();
+                    cmd.Parameters.AddWithValue("@StartedAt", start);
+                    cmd.Parameters.AddWithValue("@EndedAt", end);
+                    cmd.Parameters.AddWithValue("@WinnerName", winner.Name);
+
+                    matchId = Convert.ToInt32(cmd.ExecuteScalar());
+                }
+
+                // 2️⃣ Insert MatchPlayers
+                foreach (var player in players)
+                {
+                    using SqlCommand cmd = new SqlCommand("dbo.InsertMatchPlayer", conn, transaction);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@MatchId", matchId);
+                    cmd.Parameters.AddWithValue("@PlayerName", player.Name);
+                    cmd.Parameters.AddWithValue("@FinalHealth", player.Health);
+
+                    cmd.ExecuteNonQuery();
+                }
+
+                transaction.Commit();
+                Console.WriteLine("Match saved successfully.");
             }
-            catch (SqlException)
+            catch (SqlException ex)
             {
-                Console.WriteLine("Database error while saving player.");
+                transaction.Rollback();
+
+                Console.WriteLine("SQL ERROR:");
+                Console.WriteLine(ex.Message);
             }
         }
 
         public void ShowLeaderboard()
         {
+            using SqlConnection conn = new SqlConnection(_connectionString);
+
+            using SqlCommand cmd = new SqlCommand(
+                @"SELECT Name, MatchesPlayed, MatchesWon
+                  FROM Players
+                  ORDER BY MatchesWon DESC",
+                conn);
+
             try
             {
-                using SqlConnection conn = new SqlConnection(ConnectionString);
-                using SqlCommand cmd = new SqlCommand(
-                    "SELECT Name, Health FROM Players ORDER BY Health DESC",
-                    conn);
-
                 conn.Open();
                 using SqlDataReader reader = cmd.ExecuteReader();
 
                 Console.WriteLine("\n--- Leaderboard ---");
+
                 while (reader.Read())
                 {
+                    string name = reader.GetString(0);
+                    int played = reader.GetInt32(1);
+                    int won = reader.GetInt32(2);
+
+                    double winPercent = played == 0
+                        ? 0
+                        : (double)won / played * 100;
+
                     Console.WriteLine(
-                        $"{reader.GetString(0)} | Health: {reader.GetInt32(1)}");
+                        $"{name} | Played: {played} | Won: {won} | Win%: {winPercent:F1}%");
                 }
             }
             catch (SqlException)

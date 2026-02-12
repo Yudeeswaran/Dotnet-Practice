@@ -7,7 +7,15 @@ namespace GameSystem.Services
 {
     public class GameEngine
     {
-        private readonly PlayerDataService dataService = new PlayerDataService();
+        private readonly PlayerDataService _dataService;
+
+        private readonly string _connectionString;
+
+        public GameEngine(string connectionString)
+        {
+            _connectionString = connectionString;
+            _dataService = new PlayerDataService(connectionString);
+        }
 
         public void StartGame()
         {
@@ -27,12 +35,17 @@ namespace GameSystem.Services
             PlayerCharacter currentPlayer = player1;
             PlayerCharacter opponent = player2;
 
+            PlayerCharacter? winner = null;
+
             bool isRunning = true;
 
             while (isRunning)
             {
                 Console.WriteLine($"\n{currentPlayer.Name}'s Turn");
-                Console.WriteLine("1. Attack\n2. Heal\n3. Show Stats\n4. Give Up");
+                Console.WriteLine("1. Attack");
+                Console.WriteLine("2. Heal");
+                Console.WriteLine("3. Show Stats");
+                Console.WriteLine("4. Give Up");
                 Console.Write("Choice: ");
 
                 if (!int.TryParse(Console.ReadLine(), out int input) ||
@@ -62,30 +75,41 @@ namespace GameSystem.Services
 
                         case PlayerAction.GiveUp:
                             Console.WriteLine($"{currentPlayer.Name} gave up!");
+                            winner = opponent;   // Correct winner on surrender
                             isRunning = false;
                             break;
                     }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    Console.WriteLine("Unexpected error during turn.");
+                    Console.WriteLine($"Unexpected error: {ex.Message}");
                 }
 
+                // Check if someone died
                 if (players.Any(p => p.Health <= 0))
                 {
-                    var winner = players.First(p => p.Health > 0);
+                    winner = players.First(p => p.Health > 0);
                     Console.WriteLine($"\n{winner.Name} WINS!");
                     isRunning = false;
                 }
 
-                (currentPlayer, opponent) = (opponent, currentPlayer);
+                // Swap turns only if game still running
+                if (isRunning)
+                {
+                    (currentPlayer, opponent) = (opponent, currentPlayer);
+                }
             }
 
             TimeSpan duration = DateTime.Now - startTime;
             Console.WriteLine($"\nGame duration: {duration.TotalMinutes:F1} minutes");
 
-            players.ForEach(p => dataService.SavePlayer(p));
-            dataService.ShowLeaderboard();
+            // Save match ONLY if winner exists
+            if (winner != null)
+            {
+                _dataService.SaveMatch(startTime, DateTime.Now, winner, players);
+            }
+
+            _dataService.ShowLeaderboard();
         }
     }
 }
