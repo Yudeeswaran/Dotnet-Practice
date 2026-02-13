@@ -17,11 +17,11 @@ C:.
 |   |       \---18.0.988.22099
 |   \---GameSystem.slnx
 |       +---FileContentIndex
-|       |       07b3f5ec-2e88-4f85-90f7-a4d59c8e0761.vsidx
-|       |       3b70eace-ee50-4ce7-b753-85024e5acd40.vsidx
+|       |       18de0093-571e-4386-8c5e-c926c96e9aa4.vsidx
+|       |       2104b282-7385-4532-8fdf-5a35627d1137.vsidx
+|       |       60c67af5-e517-4b49-9909-aa7bb47e7f45.vsidx
 |       |       a7222c23-d744-4c8c-bdce-ce029bf23b8d.vsidx
-|       |       e3665096-2ad3-4c34-a9ed-52410e2590db.vsidx
-|       |       f7bb6454-b660-4458-b17b-3782ccb31b67.vsidx
+|       |       bebc594d-20e1-4f99-8830-f8b4407610a5.vsidx
 |       |       
 |       \---v18
 |               DocumentLayout.backup.json
@@ -682,15 +682,13 @@ namespace GameSystem.Services
         {
             using SqlConnection conn = new SqlConnection(_connectionString);
 
-            using SqlCommand cmd = new SqlCommand(
-                @"SELECT Name, MatchesPlayed, MatchesWon
-                  FROM Players
-                  ORDER BY MatchesWon DESC",
-                conn);
+            using SqlCommand cmd = new SqlCommand("dbo.GetLeaderboard", conn);
+            cmd.CommandType = CommandType.StoredProcedure;
 
             try
             {
                 conn.Open();
+
                 using SqlDataReader reader = cmd.ExecuteReader();
 
                 Console.WriteLine("\n--- Leaderboard ---");
@@ -714,6 +712,7 @@ namespace GameSystem.Services
                 Console.WriteLine("Database error while loading leaderboard.");
             }
         }
+
     }
 }
 

@@ -72,15 +72,13 @@ namespace GameSystem.Services
         {
             using SqlConnection conn = new SqlConnection(_connectionString);
 
-            using SqlCommand cmd = new SqlCommand(
-                @"SELECT Name, MatchesPlayed, MatchesWon
-                  FROM Players
-                  ORDER BY MatchesWon DESC",
-                conn);
+            using SqlCommand cmd = new SqlCommand("dbo.GetLeaderboard", conn);
+            cmd.CommandType = CommandType.StoredProcedure;
 
             try
             {
                 conn.Open();
+
                 using SqlDataReader reader = cmd.ExecuteReader();
 
                 Console.WriteLine("\n--- Leaderboard ---");
@@ -99,10 +97,12 @@ namespace GameSystem.Services
                         $"{name} | Played: {played} | Won: {won} | Win%: {winPercent:F1}%");
                 }
             }
-            catch (SqlException)
+            catch (SqlException ex)
             {
-                Console.WriteLine("Database error while loading leaderboard.");
+                Console.WriteLine("SQL ERROR:");
+                Console.WriteLine(ex.Message);
             }
         }
+
     }
 }

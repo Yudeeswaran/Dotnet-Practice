@@ -141,3 +141,25 @@ BEGIN
     ');
 END;
 GO
+
+-----------------------------------------------------
+-- GetLeaderboard PROCEDURE
+-----------------------------------------------------
+IF OBJECT_ID('dbo.GetLeaderboard', 'P') IS NOT NULL
+    DROP PROCEDURE dbo.GetLeaderboard;
+GO
+
+CREATE PROCEDURE dbo.GetLeaderboard
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT Name,
+           MatchesPlayed,
+           MatchesWon
+    FROM Players
+    ORDER BY MatchesWon DESC;
+END;
+GO
+
+
